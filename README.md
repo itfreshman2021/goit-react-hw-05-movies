@@ -1,3 +1,9 @@
+React homework №5 goit-react-hw-05-movies
+
+https://itfreshman2021goit-react-hw-05-movies.netlify.app/
+
+
+=================================================================================================================================================================================
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
