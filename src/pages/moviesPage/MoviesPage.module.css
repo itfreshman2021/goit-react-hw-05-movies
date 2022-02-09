@@ -1,0 +1,13 @@
+.SearchForm {
+  margin-top: 10px;
+}
+
+.SearchFormInput {
+  width: 300px;
+  margin-left: 5px;
+  outline: 1px rgb(224, 223, 223) solid;
+}
+
+.SearchFormButton {
+  outline: 1px gray solid;
+}

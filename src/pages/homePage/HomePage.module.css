@@ -1,0 +1,9 @@
+.moviesListItemLink {
+  color: blue;
+}
+
+.moviesListItemLink:hover,
+.moviesListItemLink:focus {
+  color: red;
+  cursor: pointer;
+}

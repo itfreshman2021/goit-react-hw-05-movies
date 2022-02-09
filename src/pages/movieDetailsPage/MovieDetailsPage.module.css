@@ -1,0 +1,54 @@
+.MovieDetailsPage {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px grey solid;
+}
+
+.MovieImg {
+  width: 25%;
+  height: 100%;
+  object-fit: cover;
+  outline: 1px solid gray;
+}
+
+.MovieInformations {
+  margin-left: 20px;
+}
+
+.MovieDate {
+  margin: 2px;
+}
+
+.MovieRateSpan {
+  margin-right: 5px;
+}
+
+.MovieDetailsPageAdditional {
+  border-bottom: 1px grey solid;
+}
+
+.GenresList {
+  display: flex;
+  padding: 0;
+}
+
+.GenresItem {
+  list-style: none;
+  margin-left: 5px;
+}
+
+.additionalListItemLink {
+  color: blue;
+}
+
+.additionalListItemLink:hover,
+.additionalListItemLink:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.MovieDetailsButton:hover {
+  background-color: blue;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+.navList {
+  display: flex;
+  align-items: center;
+}
+.navListItem {
+  list-style: none;
+  font-weight: bold;
+  color: black;
+
+  margin-right: 40px;
+}
+
+.navItem {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.navItem:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+.navItemActive {
+  text-decoration: none;
+  color: red;
+}
