@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet, Link, useParams, useNavigate } from 'react-router-dom';
+import { Outlet, Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { getMovieDetails } from '../../services/getmovieswithaxios';
 
 import s from './MovieDetailsPage.module.css';
@@ -18,7 +18,8 @@ export default function MovieDetailsPage() {
 
   const { movieId } = useParams();
   const navigate = useNavigate();
-  const goBack = () => navigate(-1);
+  const location = useLocation();
+
   useEffect(() => {
     let cancelled = false;
     getMovieDetails(movieId)
@@ -33,7 +34,11 @@ export default function MovieDetailsPage() {
   const { poster_path, title, release_date, vote_average, overview, genres } = movie;
   return (
     <>
-      <button type="button" onClick={() => goBack()} className={s.MovieDetailsButton}>
+      <button
+        type="button"
+        onClick={() => navigate(location?.state?.from ?? '/')}
+        className={s.MovieDetailsButton}
+      >
         Go back
       </button>
       <div className={s.MovieDetailsPage}>

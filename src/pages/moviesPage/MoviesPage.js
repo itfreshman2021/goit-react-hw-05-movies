@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { getMoviesSearch } from '../../services/getmovieswithaxios';
 import s from './MoviesPage.module.css';
 
@@ -8,6 +8,8 @@ const initialMovies = [];
 const MoviesPage = () => {
   const [movies, setMovies] = useState(initialMovies);
   const [query, setQuery] = useState('');
+  const [searchName, setSearchName] = useState('');
+  const location = useLocation();
 
   const handleSearchNameChange = event => {
     const { value } = event.target;
@@ -20,12 +22,13 @@ const MoviesPage = () => {
     if (query.trim() === '') {
       return;
     }
+
     getMoviesSearch(query)
       .then(data => setMovies(data))
       .catch(() => {
         alert('Sorry! Please try again.');
       });
-
+    setSearchName(query);
     setQuery('');
   };
 
@@ -47,7 +50,15 @@ const MoviesPage = () => {
       <ul className={s.moviesList}>
         {movies.map(({ id, title }) => (
           <li className={s.moviesListItem} key={id}>
-            <Link to={`${id}`}>{title}</Link>
+            <Link
+              state={{ from: location }}
+              to={{
+                pathname: `${id}`,
+                search: `query=${searchName}`,
+              }}
+            >
+              {title}
+            </Link>
           </li>
         ))}
       </ul>
