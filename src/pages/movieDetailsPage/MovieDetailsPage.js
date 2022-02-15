@@ -70,13 +70,13 @@ export default function MovieDetailsPage() {
         <p>Additional information</p>
         <ul className={s.additionalList}>
           <li className={s.additionalListItem}>
-            <Link to={`cast`} className={s.additionalListItemLink}>
+            <Link state={{ from: location }} to={`cast`} className={s.additionalListItemLink}>
               Cast
             </Link>
           </li>
 
           <li className={s.additionalListItem}>
-            <Link to={`reviews`} className={s.additionalListItemLink}>
+            <Link state={{ from: location }} to={`reviews`} className={s.additionalListItemLink}>
               Reviews
             </Link>
           </li>

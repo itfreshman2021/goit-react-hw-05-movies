@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { getMoviesSearch } from '../../services/getmovieswithaxios';
+import MoviesList from '../../Components/movies/MoviesList';
 import s from './MoviesPage.module.css';
 
 const initialMovies = [];
@@ -8,8 +9,21 @@ const initialMovies = [];
 const MoviesPage = () => {
   const [movies, setMovies] = useState(initialMovies);
   const [query, setQuery] = useState('');
-  const [searchName, setSearchName] = useState('');
+  // const [searchName, setSearchName] = useState('');
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    let searchName = searchParams.get('query');
+
+    if (searchName) {
+      getMoviesSearch(searchName)
+        .then(data => setMovies(data))
+        .catch(() => {
+          alert('Sorry! Please try again.');
+        });
+    }
+  }, [searchParams]);
 
   const handleSearchNameChange = event => {
     const { value } = event.target;
@@ -23,12 +37,8 @@ const MoviesPage = () => {
       return;
     }
 
-    getMoviesSearch(query)
-      .then(data => setMovies(data))
-      .catch(() => {
-        alert('Sorry! Please try again.');
-      });
-    setSearchName(query);
+    setSearchParams(`query=${query}`);
+
     setQuery('');
   };
 
@@ -47,21 +57,8 @@ const MoviesPage = () => {
           Search
         </button>
       </form>
-      <ul className={s.moviesList}>
-        {movies.map(({ id, title }) => (
-          <li className={s.moviesListItem} key={id}>
-            <Link
-              state={{ from: location }}
-              to={{
-                pathname: `${id}`,
-                search: `query=${searchName}`,
-              }}
-            >
-              {title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <MoviesList movies={movies} location={location} />
+
       <Outlet />
     </>
   );
