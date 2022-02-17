@@ -41,12 +41,16 @@ export default function MovieDetailsPage() {
       >
         Go back
       </button>
+
       <div className={s.MovieDetailsPage}>
-        <img
-          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-          alt={title}
-          className={s.MovieImg}
-        />
+        {!poster_path && <p> Poster not found</p>}
+        {poster_path && (
+          <img
+            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+            alt={title}
+            className={s.MovieImg}
+          />
+        )}
         <div className={s.MovieInformations}>
           <h2 className={s.MovieTitle}>
             {title} (<span className={s.MovieDate}>{release_date.slice(0, 4)}</span>)
@@ -70,13 +74,21 @@ export default function MovieDetailsPage() {
         <p>Additional information</p>
         <ul className={s.additionalList}>
           <li className={s.additionalListItem}>
-            <Link state={{ from: location }} to={`cast`} className={s.additionalListItemLink}>
+            <Link
+              state={location?.state && { from: location.state.from }}
+              to={`cast`}
+              className={s.additionalListItemLink}
+            >
               Cast
             </Link>
           </li>
 
           <li className={s.additionalListItem}>
-            <Link state={{ from: location }} to={`reviews`} className={s.additionalListItemLink}>
+            <Link
+              state={location?.state && { from: location.state.from }}
+              to={`reviews`}
+              className={s.additionalListItemLink}
+            >
               Reviews
             </Link>
           </li>
